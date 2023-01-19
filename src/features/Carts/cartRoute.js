@@ -3,15 +3,14 @@ const express = require("express");
 const { isAuthenticated } = require("../../middleware/auth");
 const app = express.Router();
 
-// app.get("/", async (req, res) => {
-//   const userId = req.body.userId;
-//   try {
-//     const carts = await Cart.find({ userId }).populate("productId");
-//     return res.status(200).send({ success: true, carts });
-//   } catch (error) {
-//     return res.status(404).send({ message: error.message });
-//   }
-// });
+app.get("/", async (req, res) => {
+  try {
+    let carts = Cart.find();
+    return res.status(200).send({ success: true, carts });
+  } catch (error) {
+    return res.status(404).send({ message: error.message });
+  }
+});
 
 app.post("/", async (req, res) => {
   try {
