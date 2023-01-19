@@ -5,7 +5,7 @@ const app = express.Router();
 
 app.get("/", async (req, res) => {
   try {
-    let carts = Cart.find();
+    let carts = await Cart.find();
     return res.status(200).json(carts);
   } catch (error) {
     return res.status(404).send({ message: error.message });
