@@ -15,18 +15,8 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   try {
-    const { userId, productId, quantity } = req.body;
-    const isProductExist = await Cart.findOne({ productId, userId });
-    if (isProductExist) {
-      return res
-        .status(404)
-        .send({ message: "Product already exists in cart" });
-    }
-    const cart = await Cart.create({ userId, productId, quantity });
-    const newCartItem = await Cart.findById(cart._id)
-      .populate("productId")
-      .select("-userId");
-    return res.status(201).send({ message: `Product Added Successfully` });
+    const cart = await Cart.create(req.body);
+    return res.status(201).send({ message: cart });
   } catch (error) {
     return res.status(404).send({ message: error });
   }
