@@ -28,7 +28,7 @@ app.post("/", async (req, res) => {
       .select("-userId");
     return res.status(201).send({ message: `Product Added Successfully` });
   } catch (error) {
-    return res.status(404).send({ message: "Something went wrong" });
+    return res.status(404).send({ message: error });
   }
 });
 
