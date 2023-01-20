@@ -21,45 +21,43 @@ app.post("/", async (req, res) => {
   }
 });
 
-// app.put("/", async (req, res) => {
-//   try {
-//     const { id, userId, quantity } = req.body;
-//     const cartItem = await Cart.findById(id);
+app.put("/", async (req, res) => {
+  try {
+    const { id, quantity } = req.body;
+    const cartItem = await Cart.findById(id);
 
-//     if (cartItem && cartItem.userId.toString() === userId) {
-//       const cart = await Cart.findByIdAndUpdate(
-//         id,
-//         { userId, productId: cartItem.productId, quantity },
-//         { new: true }
-//       )
-//         .populate("productId")
-//         .select("-userId");
-//       return res.status(200).send({ message: "Cart updated successfully" });
-//     } else {
-//       return res.status(404).send({ message: "Item does not exist in cart" });
-//     }
-//   } catch (error) {
-//     return res.status(404).send({ message: "Something went wrong" });
-//   }
-// });
+    if (cartItem) {
+      const cart = await Cart.findByIdAndUpdate(
+        id,
+        { quantity },
+        { new: true }
+      );
+      return res
+        .status(200)
+        .send({ message: "Cart updated successfully", cart });
+    } else {
+      return res.status(404).send({ message: "Item does not exist in cart" });
+    }
+  } catch (error) {
+    return res.status(404).send({ message: error });
+  }
+});
 
-// app.delete("/", async (req, res) => {
-//   try {
-//     const { id, userId } = req.body;
-//     const cartItem = await Cart.findById(id);
-//     if (cartItem && cartItem.userId.toString() === userId) {
-//       const cart = await Cart.findByIdAndDelete(id)
-//         .populate("productId")
-//         .select("-userId");
-//       return res
-//         .status(200)
-//         .send({ message: `Deleted the product from cart successfully` });
-//     } else {
-//       return res.status(404).send({ message: "Item does not exist in cart" });
-//     }
-//   } catch (error) {
-//     return res.status(404).send({ message: "Something went wrong" });
-//   }
-// });
+app.delete("/", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const cartItem = await Cart.findById(id);
+    if (cartItem) {
+      await Cart.findByIdAndDelete(id);
+      return res.send({
+        message: `Deleted the product from cart successfully`,
+      });
+    } else {
+      return res.status(404).send({ message: "Item does not exist in cart" });
+    }
+  } catch (error) {
+    return res.send({ message: error });
+  }
+});
 
 module.exports = app;
