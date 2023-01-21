@@ -7,4 +7,4 @@
   <li>MongoDB</li>
 </ul>
 
-<h2>Deployed on: <a href="https://odd-tan-lizard-kit.cyclic.app/" target="_SEJ" rel="noreferrer">Cyclic</a></h2>
+<h2>Deployed on: <a href="https://odd-tan-lizard-kit.cyclic.app/" target="_blank">Cyclic</a></h2>
