@@ -4,8 +4,9 @@ const { isAuthenticated } = require("../../middleware/auth");
 const app = express.Router();
 
 app.get("/", async (req, res) => {
+  let { userid } = req.body;
   try {
-    let carts = await Cart.find(req.body);
+    let carts = await Cart.find({ userid });
     return res.send(carts);
   } catch (error) {
     return res.status(404).send({ message: error.message });
