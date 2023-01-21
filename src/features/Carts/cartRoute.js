@@ -3,8 +3,8 @@ const express = require("express");
 const { isAuthenticated } = require("../../middleware/auth");
 const app = express.Router();
 
-app.get("/", async (req, res) => {
-  let { userid } = req.body;
+app.get("/:userid", async (req, res) => {
+  let { userid } = req.params;
   try {
     let carts = await Cart.find({ userid });
     return res.send(carts);
