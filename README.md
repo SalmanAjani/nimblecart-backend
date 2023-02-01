@@ -1,4 +1,4 @@
-<h1>This is the database made for Paytmmall FrontEnd clone.</h1> 
+<h1>This is the database made for Nimblecart frontend.</h1> 
 
 <h2>Techstack used: </h2>
 <ul>
